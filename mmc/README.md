@@ -21,3 +21,4 @@ npm run build --report
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
 今天新增了几个数据库原型  2019.5.19
+新增注册登录模块，并且用到了session保存登陆状态，crypto对密码进行加密 2019.5.21
