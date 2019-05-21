@@ -26,6 +26,6 @@ const ScoreSchema = new Schema({
   }
 });
 
-const score = mongoose.model("classinfo",ScoreSchema);
+const score = mongoose.model("Score",ScoreSchema);
 
 module.exports = score;

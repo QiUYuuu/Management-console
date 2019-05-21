@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 //Creat Schema
-//考试分数的数据库
+//考级分数的数据库
 const TestSchema = new Schema({
   //学生姓名
   StudentName: {
@@ -31,6 +31,6 @@ const TestSchema = new Schema({
   }
 });
 
-const test = mongoose.model("classinfo",TestSchema);
+const test = mongoose.model("Test",TestSchema);
 
 module.exports = test;
