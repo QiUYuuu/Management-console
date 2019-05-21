@@ -34,31 +34,27 @@ app.use(session({
 }));
 
 
+
+
 // 获取post参数
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
 //配置路由
+
+app.all('*', function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild');
+  res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
+  res.header("X-Powered-By",' 3.2.1');
+  res.header("Content-Type", "application/json;charset=utf-8");
+  next();
+});
 app.use('/', require('../router/index'));
+
+
 
 
 
 //监听端口
 app.listen(2222);
-
-
-// User.create({
-//   name: "qiuyu",
-//   Student_ID: 201402127106,
-//   password: "123456",
-//   phone: 15671551894,
-//   address: "B6-5033",
-//   ID_number: "220322199611126312",
-//   college: "CaiYe",
-//   major: "JinCai",
-//   _class: "3",
-//   date: new Date(),
-//   position: "none",
-//   Political_outlook: "tuanyuan",
-//   grade: 1
-// });
