@@ -3,12 +3,15 @@
 import Vue from 'vue'
 import App from './App'
 import axios from 'axios'
+import './axios/request'
 import VueRouter from 'vue-router'
 //import  DB from '../config/key'
 
 import  Index from './components/index'
 import  Login from './components/login'
+import  Reg from './components/reg'
 
+Vue.prototype.$ajax = axios;
 Vue.config.productionTip = false;
 Vue.use(VueRouter);
 
@@ -20,7 +23,8 @@ const router = new VueRouter({
   base: __dirname,
   routes:[
     {path:"/",component:Login},
-    {path:"/index",component:Index}
+    {path:"/index",component:Index},
+    {path: "/reg",component: Reg}
   ]
 });
 
