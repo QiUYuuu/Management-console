@@ -17,6 +17,8 @@ router.get("/",function (req,res) {
   })
 });
 
+
+//注册
 router.get("/reg",function (req,res) {
   res.send("reg")
 }).post("/reg",function (req,res) {
@@ -44,7 +46,7 @@ router.get("/reg",function (req,res) {
       position: req.body.position,
       Political_outlook: req.body.Political_outlook,
       grade: req.body.grade
-    }).then((data) => {
+    }).then((res) => {
       res.send({code: 200, msg: "注册成功"});
     }).catch(function (err) {
       console.log(err);
@@ -54,12 +56,14 @@ router.get("/reg",function (req,res) {
   });
 });
 
+//登陆
 router.get("/login",function (req,res) {
   res.render({
     login: req.session.login,
     title: '首页'
   });
 }).post("/login",function (req,res) {
+
   //学号是否存在
   user.findOne({Student_ID: req.body.Student_ID}, function (err,data) {
     if(data){
