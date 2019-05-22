@@ -13,35 +13,35 @@
             <ul class="nav navbar-nav navbar-right">
               <li><router-link to="/add">交易记录</router-link></li>
               <li><router-link to="/add">客户信息管理</router-link></li>
-              <li><router-link to="/add">添加用户</router-link></li>
+              <li><router-link to="/reg">添加用户</router-link></li>
               <li><router-link to="/add">打卡</router-link></li>
-              <li><router-link to="/add"><span class="glyphicon glyphicon-log-in"></span> 登录</router-link></li>
+              <li><router-link to="/"><span class="glyphicon glyphicon-log-in"></span> 登录</router-link></li>
               <li><router-link to="/add">头像</router-link></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
       </nav>
-      <nav style="width: 70px;top: 51px; background-color: #F8F8F8" class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper"
+      <nav style="width: 50px;height:100%;top: 51px; background-color: #F8F8F8" class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper"
            role="navigation">
         <ul class="nav sidebar-nav">
-          <li class="sidebar-brand"> <a href="#">  3 </a> </li>
-          <li> <a href="#"> <i class="fa fa-fw fa-home"> </i> Home </a> </li>
-          <li> <a href="#"> <i class="fa fa-fw fa-folder"> </i>  one </a> </li>
-          <li> <a href="#"> <i class="fa fa-fw fa-file-o"> </i> Second  </a> </li>
-          <li> <a href="#"> <i class="fa fa-fw fa-cog"> </i> Third </a> </li>
-          <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-fw fa-plus"> </i> Dropdown  </a>
+          <li class="sidebar-brand"> <a href="#"> <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span> </a> </li>
+          <li> <a href="#"> <i class="fa fa-fw fa-home"> </i> <span class="glyphicon glyphicon-fire" aria-hidden="true"></span> </a> </li>
+          <li> <a href="#"> <i class="fa fa-fw fa-folder"> </i>  <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> </a> </li>
+          <li> <a href="#"> <i class="fa fa-fw fa-file-o"> </i> <span class="glyphicon glyphicon-folder-close" aria-hidden="true"></span>  </a> </li>
+          <li> <a href="#"> <i class="fa fa-fw fa-cog"> </i> <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> </a> </li>
+          <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-fw fa-plus"> </i> <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>  </a>
             <ul class="dropdown-menu" role="menu">
-              <li class="dropdown-header"> Dropdown heading </li>
-              <li> <a href="#"> Action </a> </li>
-              <li> <a href="#"> Another action </a> </li>
-              <li> <a href="#"> Something else here </a> </li>
-              <li> <a href="#"> Separated link </a> </li>
-              <li> <a href="#"> One more separated link </a> </li>
+              <li class="dropdown-header"> <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span> </li>
+              <li> <a href="#"> <span class="glyphicon glyphicon-phone" aria-hidden="true"></span> </a> </li>
+              <li> <a href="#"> <span class="glyphicon glyphicon-copyright-mark" aria-hidden="true"></span> </a> </li>
+              <li> <a href="#"> <span class="glyphicon glyphicon-tree-deciduous" aria-hidden="true"></span> </a> </li>
+              <li> <a href="#"> <span class="glyphicon glyphicon-cd" aria-hidden="true"></span> </a> </li>
+              <li> <a href="#"> <span class="glyphicon glyphicon-king" aria-hidden="true"></span> </a> </li>
             </ul>
           </li>
-          <li> <a href="#"> <i class="fa fa-fw fa-bank"> </i> Page four </a> </li>
-          <li> <a href="#"> <i class="fa fa-fw fa-dropbox"> </i> Page 5 </a> </li>
-          <li> <a href="#"> <i class="fa fa-fw fa-twitter"> </i> Last page </a> </li>
+          <li> <a href="#"> <i class="fa fa-fw fa-bank"> </i> <span class="glyphicon glyphicon-apple" aria-hidden="true"></span> </a> </li>
+          <li> <a href="#"> <i class="fa fa-fw fa-dropbox"> </i> <span class="glyphicon glyphicon-ice-lolly" aria-hidden="true"></span></a> </li>
+          <li> <a href="#"> <i class="fa fa-fw fa-twitter"> </i> <span class="glyphicon glyphicon-grain" aria-hidden="true"></span> </a> </li>
         </ul>
       </nav>
     </div>
