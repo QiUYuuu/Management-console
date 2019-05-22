@@ -1,5 +1,7 @@
 <template>
+  <!--登录界面-->
   <div id="login">
+    <h1>阿里西信息管理控制平台</h1>
     <Alert :message="alert" v-show="alert"></Alert>
     <div id="container">
       <form @submit="submit">
@@ -18,8 +20,8 @@
 </template>
 
 <script>
-  import axios from 'axios'
   import Alert from './Alert'
+
     export default {
         name: "login",
         data(){
@@ -34,13 +36,17 @@
               Student_ID : this.user.Student_ID,
               password: this.user.password
             };
-            axios.post('http://localhost:2222/login',newUser)
-              .then((response) => {
-                console.log(response);
-                if(response.data.code === 200){
-                  this.$router.push({path:"/index",query:{alert:response.data.msg}});
+            this.$ajax({
+              method: "post",
+              url: "http://localhost:2222/login",
+              data: newUser
+            })
+              .then(res => {
+                console.log(res);
+                if(res.data.code === 200){
+                  this.$router.push({path:"/index",query:{alert:res.data.msg}});
                 }
-                this.alert = response.data.msg;
+                this.alert = res.data.msg;
               });
             e.preventDefault();
           }
@@ -51,18 +57,37 @@
     }
 </script>
 
-<style scoped>
+<style>
+  html,body{
+    height: 100%;
+  }
+  body>div{
+    height: 100%;
+  }
   #login{
+    display: block;
+    position: relative;
     width: 100%;
-    height: 880px;
+    height: 100%;
     overflow: hidden;
     background-color: beige;
   }
-  #container{
+  h1{
+    width: 23%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 130px;
+    margin: auto;
+  }
+  #login #container{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 200px;
     width: 430px;
     height: 200px;
-    padding: 1px;
-    margin: 200px auto;
+    margin: auto;
     background-color:powderblue;
   }
   .input-group{
