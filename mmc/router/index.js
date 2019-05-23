@@ -1,6 +1,9 @@
 const express = require("express"),
   user = require("../models/User_Schema"),
   crypto = require("crypto"),
+  jwt = require("jsonwebtoken"),
+  keys = require("../config/key"),
+  passport = require("passport"),
   router = express.Router();
 
 /*
@@ -72,12 +75,29 @@ router.get("/login",function (req,res) {
       if(data.password === password){
         req.session.login = true;
         req.session.user = data;
-        return res.send({code: 200,msg: "登陆成功"});
+
+        const rule = {id:user.id,name:user.name};
+        //jwt.sign("规则","加密名字","过期时间","箭头函数")
+        jwt.sign(rule,keys.secretOrKey,{expiresIn:3600},(err,token) => {
+            if(err) throw err;
+            res.send({
+                code: 200,
+                msg: "登陆成功！",
+                token: "Bearer " + token
+          });
+        });
+      }else{
+        res.send({code: 400,msg: "密码错误！"});
       }
-      return res.send({code: 400,msg: "密码错误"})
+    }else{
+      res.send({code: 400,msg: "学号错误！"});
     }
-    return res.send({code: 400,msg: "学号错误"});
   })
+});
+
+
+router.get("/users",passport.authenticate("jwt",{session:false}),(req,res) => {
+  res.send(req.user);
 });
 
 
