@@ -5,11 +5,13 @@ import App from './App'
 import axios from 'axios'
 import './axios/request'
 import VueRouter from 'vue-router'
+import { store } from  './store/store'
 //import  DB from '../config/key'
 
 import  Index from './components/index'
 import  Login from './components/login'
 import  Reg from './components/reg'
+import Users from './components/Users'
 
 Vue.prototype.$ajax = axios;
 Vue.config.productionTip = false;
@@ -24,13 +26,15 @@ const router = new VueRouter({
   routes:[
     {path:"/",component:Login},
     {path:"/index",component:Index},
-    {path: "/reg",component: Reg}
+    {path: "/reg",component: Reg},
+    {path: "/users",component: Users}
   ]
 });
 
 /* eslint-disable no-new */
 new Vue({
   router,
+  store: store,
   template: `
   <div>
     <router-view></router-view>
