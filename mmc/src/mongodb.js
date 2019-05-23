@@ -5,10 +5,13 @@ const Experiment = require("../models/Experiment_Schema");
 const Grading = require("../models/Grading_test_Schema");
 const Training = require("../models/Training-plan_Schema");
 const Score = require("../models/Score_Schema");
+const passport = require("passport");
 const express = require("express");
 const app = express();
 const session = require("express-session");
 const Mongosession = require("connect-mongo")(session);
+
+
 
 //连接mongodb数据库
 const mongoose = require("mongoose");
@@ -20,6 +23,11 @@ mongoose.connection.once("open",function () {
 mongoose.connection.once("error",function () {
   console.log("连接失败");
 });
+
+
+//初始化passport
+app.use(passport.initialize());
+require("../config/passport")(passport);
 
 // 使用方式  req.session.xxx = xxx
 app.use(session({
@@ -40,7 +48,7 @@ app.use(session({
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
-//配置路由
+//配置路由跨域
 
 app.all('*', function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
