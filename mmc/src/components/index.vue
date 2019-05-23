@@ -16,7 +16,7 @@
               <li><router-link to="/reg">添加用户</router-link></li>
               <li><router-link to="/add">打卡</router-link></li>
               <li><router-link to="/"><span class="glyphicon glyphicon-log-in"></span> 登录</router-link></li>
-              <li><router-link to="/add">头像</router-link></li>
+              <li><router-link to="/users">头像</router-link></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
