@@ -11,11 +11,13 @@ const app = express();
 const session = require("express-session");
 const Mongosession = require("connect-mongo")(session);
 
+const db = require("../config/key").mongoURI;
+
 
 
 //连接mongodb数据库
 const mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost:27017/chenxi",{useNewUrlParser: true});
+mongoose.connect(db,{useNewUrlParser: true});
 
 mongoose.connection.once("open",function () {
   console.log("连接成功");
@@ -41,15 +43,11 @@ app.use(session({
   })
 }));
 
-
-
-
 // 获取post参数
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
 //配置路由跨域
-
 app.all('*', function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild');
@@ -58,11 +56,9 @@ app.all('*', function(req, res, next) {
   res.header("Content-Type", "application/json;charset=utf-8");
   next();
 });
+
 app.use('/', require('../router/index'));
-
-
-
-
+app.use('/users',require('../router/users'));
 
 //监听端口
 app.listen(2222);
