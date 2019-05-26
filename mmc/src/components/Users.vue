@@ -20,7 +20,7 @@
           <td>{{User.age}}</td>
           <td>{{User.Student_ID}}</td>
           <td>{{User.college}} - {{User.major}} - {{User._class}}班</td>
-          <td><router-link class="btn btn-default" :to='"/details"'>详情</router-link><router-link class="btn btn-default" :to='"/edit"'>编辑</router-link></td>
+          <td><router-link :num="User._id" class="btn btn-default" :to='"/users/details?id="+User._id'>详情</router-link><router-link class="btn btn-info" :to='"/users/edit?id="+User._id'>编辑</router-link><router-link class="btn btn-danger" :to='"/users/del?id="+User._id'>删除</router-link></td>
         </tr>
         </tbody>
       </table>
@@ -32,7 +32,7 @@
                   <span aria-hidden="true">&laquo;</span>
                 </a>
               </li>
-              <li v-for="count in counts"  @click="changePage(count)" :key="count"><a href="#">{{count}}</a></li>
+              <li v-for="(count,index) in counts"  @click="changePage(count)" :key="index"><a href="#">{{count}}</a></li>
               <li>
                 <a @click="nextPage" href="#" aria-label="Next">
                   <span aria-hidden="true">&raquo;</span>
@@ -47,6 +47,7 @@
 
 <script>
   import Index from './index'
+  import Alert from './Alert'
     export default {
         name: "Users",
         data(){
@@ -54,11 +55,13 @@
             UserInfo: [],
             page: 1,
             limit: 10,
-            counts: 0
+            counts: 0,
+            alert: ""
           }
         },
         components: {
-            Index
+            Index,
+            Alert
         },
         methods: {
           fetchInfo(){
@@ -75,9 +78,9 @@
             }).then(res => {
               this.UserInfo = res.data.data;
               this.counts = Math.ceil(res.data.count / this.limit);
-              console.log(res);
             })
           },
+          //分页相关 ---  下一页
           nextPage(){
             if(this.page < this.counts){
               this.page++;
@@ -86,6 +89,7 @@
             }
             this.fetchInfo();
           },
+          //分页相关--- 上一页
           lastPage(){
             if(this.page > 1){
               this.page--;
