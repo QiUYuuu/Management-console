@@ -11,7 +11,7 @@ const UserSchema = new Schema({
     },
     //学号
     Student_ID:{
-        type: Number,
+        type: String,
         required: true
     },
     //密码
@@ -36,7 +36,7 @@ const UserSchema = new Schema({
     },
     //电话
     phone: {
-        type: Number,
+        type: String,
         required: true
     },
     //宿舍住址

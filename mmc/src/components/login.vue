@@ -43,7 +43,6 @@
             })
               .then(res => {
                 if(res.data.code === 200){
-                  console.log(res.data);
                   this.$store.commit(`addToken(${res.data.token})`);
                   this.$router.push({path:"/index",query:{alert:res.data.msg}});
                 }

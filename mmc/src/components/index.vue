@@ -9,11 +9,12 @@
           <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
               <li><router-link to="/">管理控制台</router-link></li>
+              <li style="margin-left: 70px"></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <li><router-link to="/add">交易记录</router-link></li>
               <li><router-link to="/add">客户信息管理</router-link></li>
-              <li><router-link to="/reg">添加用户</router-link></li>
+              <li><router-link to="/reg">注册用户</router-link></li>
               <li><router-link to="/add">打卡</router-link></li>
               <li><router-link to="/"><span class="glyphicon glyphicon-log-in"></span> 登录</router-link></li>
               <li><router-link to="/users">头像</router-link></li>
@@ -44,6 +45,10 @@
           <li> <a href="#"> <i class="fa fa-fw fa-twitter"> </i> <span class="glyphicon glyphicon-grain" aria-hidden="true"></span> </a> </li>
         </ul>
       </nav>
+      <div id="rightDiv">
+        <div id="top">大家好</div>
+        <div id="bottom">我是练习时长两年半的个人练习生</div>
+      </div>
     </div>
 </template>
 
@@ -55,5 +60,22 @@
 </script>
 
 <style scoped>
-
+  #rightDiv{
+    float: right;
+    width: 190px;
+    height: 550px;
+    background-color: burlywood;
+  }
+  #top{
+    width: 90%;
+    height: 30%;
+    margin: 10px auto;
+    background-color: aqua;
+  }
+  #bottom{
+    width: 90%;
+    height: 60%;
+    margin: 20px auto;
+    background-color: aquamarine;
+  }
 </style>

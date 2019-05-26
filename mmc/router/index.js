@@ -96,25 +96,4 @@ router.get("/login",function (req,res) {
   })
 });
 
-
-// router.get("/users",passport.authenticate("jwt",{session:false}),(req,res) => {
-//   Promise.all([
-//     user.find().sort({Student_ID: -1})
-//       .skip((req.body.page - 1) * req.body.limit).limit(Number(req.body.limit)),
-//     user.countDocuments()
-//   ]).then(function (data) {
-//     res.send({code: 0, data: data[0], count: data[1]},req.user)
-//   });
-// });
-
-router.get("/users",function (req,res) {
-  Promise.all([
-    user.find().sort({Student_ID: -1})
-      .skip((req.query.page - 1) * req.query.limit).limit(Number(req.query.limit)),
-    user.countDocuments()
-  ]).then(function (data) {
-    res.send({code: 200, data: data[0], count: data[1]})
-  });
-});
-
 module.exports = router;
