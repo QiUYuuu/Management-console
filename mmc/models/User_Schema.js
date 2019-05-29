@@ -10,7 +10,7 @@ const UserSchema = new Schema({
         required: true
     },
     //学号
-    Student_ID:{
+    Student_ID: {
         type: String,
         required: true
     },
@@ -21,18 +21,18 @@ const UserSchema = new Schema({
     },
     //年龄
     age: {
-      type: Number,
-      required: true
+        type: Number,
+        required: true
     },
     //民族
     nation: {
-      type: String,
-      required: true
+        type: String,
+        required: true
     },
     //性别
     sex: {
-      type: String,
-      required: true
+        type: String,
+        required: true
     },
     //电话
     phone: {
@@ -50,19 +50,19 @@ const UserSchema = new Schema({
         required: true
     },
     //学院
-    college:{
+    college: {
         type: String,
-        required:true
+        required: true
     },
     //科系
-    major:{
-      type: String,
-      required:true
+    major: {
+        type: String,
+        required: true
     },
     //班级
-    _class:{
-      type: String,
-      required:true
+    _class: {
+        type: String,
+        required: true
     },
     //创建时间
     date: {
@@ -71,11 +71,11 @@ const UserSchema = new Schema({
     },
     //职位
     position: {
-        type:String,
+        type: String,
         required: true
     },
     //政治面貌
-    Political_outlook:{
+    Political_outlook: {
         type: String,
         required: true
     },
@@ -86,6 +86,6 @@ const UserSchema = new Schema({
     }
 });
 
-const user = mongoose.model("user",UserSchema);
+const user = mongoose.model("user", UserSchema);
 
 module.exports = user;
