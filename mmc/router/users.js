@@ -13,6 +13,16 @@ const express = require("express"),
 //   });
 // });
 
+// router.get("/",passport.authenticate("jwt",{session:false}),function (req,res) {
+//   Promise.all([
+//     user.find().sort({Student_ID: -1})
+//       .skip((req.query.page - 1) * req.query.limit).limit(Number(req.query.limit)),
+//     user.countDocuments()
+//   ]).then(function (data) {
+//     res.send({code: 200, data: data[0], count: data[1],user:req.user})
+//   });
+// });
+
 router.get("/",function (req,res) {
   Promise.all([
     user.find().sort({Student_ID: -1})
@@ -61,9 +71,10 @@ router.get("/edit",function (req,res) {
 
 
 router.get("/del",function (req,res) {
-  user.findById(req.query.id)
+  console.log(req.query);
+  user.findByIdAndDelete(req.query.id)
     .then( data => {
-      res.send({code:200,data:data});
+      res.send({code: 200,msg:"删除成功！"});
     })
 });
 
