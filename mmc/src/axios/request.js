@@ -14,9 +14,14 @@ service.interceptors.request.use(config => {
     text: '数据加载中……'
   });
 
-  config.method === 'post'
-    ? config.data = qs.stringify({...config.data})
-    : config.params = {...config.params};
+  // config.method === 'post'
+  //   ? config.data = qs.stringify({...config.data})
+  //   : config.params = qs.stringify({...config.params});
+  if(config.method === "post"){
+    config.data = qs.stringify({...config.data});
+  }else{
+    config.params = {...config.params};
+  }
   config.headers['Content-Type'] = 'application/x-www-form-urlencoded';
 
   return config;
