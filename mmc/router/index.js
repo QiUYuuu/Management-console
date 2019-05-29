@@ -12,12 +12,8 @@ const express = require("express"),
 *
 * */
 
-router.get("/",function (req,res) {
-  res.render({
-    login: req.session.login,
-    user: req.session.user,
-    title: "首页"
-  })
+router.get("/index",passport.authenticate("jwt",{session:false}),function (req,res) {
+  res.send({code: 200,user:req.user})
 });
 
 
@@ -61,12 +57,7 @@ router.get("/reg",function (req,res) {
 });
 
 //登陆
-router.get("/login",function (req,res) {
-  res.render({
-    login: req.session.login,
-    title: '首页'
-  });
-}).post("/login",function (req,res) {
+router.post("/login",function (req,res) {
 
   //学号是否存在
   user.findOne({Student_ID: req.body.Student_ID}, function (err,data) {
