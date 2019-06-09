@@ -3,26 +3,35 @@
 import Vue from 'vue'
 import axios from 'axios'
 import './axios/request'
-import VueRouter from 'vue-router'
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
 import { store } from  './store/store'
-import { routes } from './vue-router/vue-routes'
+import router from './vue-router/vue-routes'
 
 
 Vue.prototype.$ajax = axios;
 Vue.config.productionTip = false;
-Vue.use(VueRouter);
+Vue.use(ElementUI,{ size: 'small', zIndex: 3000 });
 
 
-const router = new VueRouter({
-  mode: "history",
-  base: __dirname,
-  routes
+router.beforeEach((to, from, next) => {
+  if (to.meta.requireAuth === undefined) {
+    if (store.state.getters.token) {
+      next()
+    } else {
+      next({
+        path: '/login'
+      })
+    }
+  } else {
+    next()
+  }
 });
 
 /* eslint-disable no-new */
 new Vue({
   router,
-  store: store,
+  store,
   template: `
   <div>
     <router-view></router-view>
