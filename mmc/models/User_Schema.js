@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const Score = require("./Score_Schema");
 
 //Creat Schema
 //学生信息的数据库
@@ -63,6 +64,10 @@ const UserSchema = new Schema({
     _class: {
         type: String,
         required: true
+    },
+    //考试成绩
+    score: {
+        type: [ {type: mongoose.Schema.Types.ObjectId,ref: "Score"} ]
     },
     //创建时间
     date: {

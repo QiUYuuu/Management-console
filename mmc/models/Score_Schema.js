@@ -14,17 +14,20 @@ const ScoreSchema = new Schema({
         type: Number,
         required: true
     },
-    //考试科目
-    ExaminationName: {
-        type: String,
-        required: true
-    },
-    //考试分数
-    score: {
-        type: Number,
-        required: true
+    //分数详情
+    scoreInfo: { type: [{
+        //科目
+        ExaminationName: {type: String,required: true},
+        score: {type: Number,required:true}
+      }]
     }
 });
+
+// ExaminationName: {
+//   type: String,
+//     required: true
+// },
+// //考试分数
 
 const score = mongoose.model("Score", ScoreSchema);
 
