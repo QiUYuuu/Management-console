@@ -1,18 +1,18 @@
 <template>
-  <div id="education">
-      <h1>教务运行</h1>
+  <div id="Training_plan">
+    <h1>培养方案</h1>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
     export default {
-        name: "educational"
+        name: "Training_plan"
     }
 </script>
 
 <style scoped>
-  #education{
+  #Training_plan{
     border: 2px solid #b3d4fc;
   }
 </style>

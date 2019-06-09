@@ -2,26 +2,22 @@
     <!--登录界面-->
     <div>
         <div id="particles-js"></div>
-
         <div class="content text-md-center">
             <div id="login">
                 <h1>阿里西信息管理控制平台</h1>
                 <Alert :message="alert" v-show="alert"></Alert>
-                <div id="container">
-                    <form @submit="submit">
-                        <div class="input-group">
-                            <span class="input-group-addon" id="sizing-addon2">学号</span>
-                            <input v-model="user.Student_ID" type="text" class="form-control" placeholder="Username" aria-describedby="sizing-addon2">
-                        </div>
-                        <div class="input-group">
-                            <span class="input-group-addon" id="sizing-addon">密码</span>
-                            <input v-model="user.password" type="password" class="form-control" placeholder="Password" aria-describedby="sizing-addon2">
-                        </div>
-                        <button type="submit" id="btn" class="btn btn-primary btn-block">登录</button>
-                    </form>
-                </div>
+                  <el-form status-icon label-width="100px" class="demo-ruleForm">
+                    <el-form-item label="学号" prop="pass">
+                      <el-input type="text" v-model="user.Student_ID"  placeholder="学号" autocomplete="off"></el-input>
+                    </el-form-item>
+                    <el-form-item label="密码" prop="checkPass">
+                      <el-input type="password" v-model="user.password"  placeholder="密码" autocomplete="off"></el-input>
+                    </el-form-item>
+                    <el-form-item>
+                      <el-button style="width: 100%" type="primary" @click.prevent="submit">提交</el-button>
+                    </el-form-item>
+                  </el-form>
             </div>
-
         </div>
     </div>
 </template>
@@ -31,12 +27,15 @@
         name: "login",
         data() {
             return {
-                user: {},
+                user: {
+                  Student_ID: "",
+                  password: ""
+                },
                 alert: ""
             }
         },
         methods: {
-            submit(e) {
+            submit() {
                 let newUser = {
                     Student_ID: this.user.Student_ID,
                     password: this.user.password
@@ -45,25 +44,19 @@
                         method: "post",
                         url: "http://localhost:2222/login",
                         data: newUser
-                    })
-                    .then(res => {
+                    }).then(res => {
                         if (res.data.code === 200) {
-                            console.log(res);
+                            // console.log(res);
                             this.addToken(res.data.token);
                             this.$router.push({
-                                path: "/index"
+                                path: "/index/hello"
                             });
-                            //this.refresh();
                         }
                         this.alert = res.data.msg;
                     });
-                e.preventDefault();
             },
             addToken: function(amount) {
                 this.$store.dispatch("addToken", amount);
-            },
-            refresh() {
-                this.$router.go(0);
             }
         },
         components: {
@@ -75,12 +68,11 @@
 
 
 <style>
-    @import "../../../static/css/stylesheet.css";
-
     html,
     body {
         height: 100%;
         overflow: hidden;
+        margin: 0;
     }
 
     body>div {
@@ -103,24 +95,9 @@
         color: #75361e;
     }
 
-    #login #container {
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: 230px;
-        width: 430px;
-        height: 200px;
-        margin: auto;
-        /*background-color:powderblue;*/
+    .demo-ruleForm{
+      width: 30%;
+      margin-top: 250px;
+      margin-left: 543px;
     }
-
-    .input-group {
-        margin: 25px;
-    }
-
-    #btn {
-        width: 380px;
-        margin: 0 auto;
-    }
-
 </style>

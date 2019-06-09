@@ -96,7 +96,7 @@
 </template>
 
 <script>
-    import Alert from './Alert'
+    import Alert from '../Alert'
     export default {
         name: "Users",
         data() {

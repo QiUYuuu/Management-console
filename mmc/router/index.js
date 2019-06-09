@@ -1,5 +1,7 @@
 const express = require("express"),
   user = require("../models/User_Schema"),
+  routes = require('../models/Routes'),
+  Score = require("../models/Score_Schema"),
   crypto = require("crypto"),
   jwt = require("jsonwebtoken"),
   keys = require("../config/key"),
@@ -12,12 +14,9 @@ const express = require("express"),
 *
 * */
 
-router.get("/index",passport.authenticate("jwt",{session:false}),function (req,res) {
-  res.send({code: 200,user:req.user})
-});
 
 
-//注册
+//注册/添加用户
 router.get("/reg",function (req,res) {
   res.send("reg")
 }).post("/reg",function (req,res) {
@@ -58,7 +57,6 @@ router.get("/reg",function (req,res) {
 
 //登陆
 router.post("/login",function (req,res) {
-
   //学号是否存在
   user.findOne({Student_ID: req.body.Student_ID}, function (err,data) {
     if(data){
@@ -68,7 +66,7 @@ router.post("/login",function (req,res) {
         req.session.login = true;
         req.session.user = data;
 
-        const rule = {id:user.id,name:user.name};
+        const rule = {id: req.body.id,name: req.body.name,Student_ID: req.body.Student_ID};
         //jwt.sign("规则","加密名字","过期时间","箭头函数")
         jwt.sign(rule,keys.secretOrKey,{expiresIn:3600},(err,token) => {
             if(err) throw err;
@@ -86,5 +84,88 @@ router.post("/login",function (req,res) {
     }
   })
 });
+
+//首页验证
+router.get("/index",passport.authenticate("jwt",{session:false}),function (req,res) {
+  res.send({code: 200,user:req.user})
+});
+
+//添加成绩
+router.post("/addScore",function (req,res) {
+  Score.updateOne({
+    StudentName: req.body.StudentName,
+    Student_ID: req.body.Student_ID,
+  },{$push: {scoreInfo: {
+        ExaminationName: req.body.ExaminationName,
+        score: req.body.score
+      }}},
+    {upsert:true}
+    ).then((response) => {
+    res.send({code:200,msg:"成绩添加成功！"});
+  }).catch(function (err) {
+    console.log(err);
+  })
+});
+
+//成绩查询
+router.get("/getAllScore",function (req,res) {
+  Promise.all([
+    Score.findOne({Student_ID: req.query.Student_ID},{scoreInfo:1})
+    // .skip((req.body.page - 1) * req.body.limit).limit(Number(req.body.limit)).countDocuments()
+  ]).then(function (data) {
+    res.send({code: 200, data: data[0]})
+  });
+});
+
+//添加动态路由
+router.post("/addRouter",function (req,res) {
+  // let newRouter = {};
+  // newRouter.nodes = [];
+  // if(req.body.path) newRouter.path = req.body.path;
+  // if(req.body.name) newRouter.name = req.body.name;
+  // if(req.body.meta) newRouter.meta = req.body.meta;
+  // if(req.body.grade) newRouter.grade = req.body.grade;
+  // if(req.body.component) newRouter.component = req.body.component;
+  // if(req.body.level) newRouter.level = req.body.level;
+  // if(req.body.node) newRouter.nodes.push(req.body.node);
+
+  routes.updateOne({
+      path : req.body.path,
+      name : req.body.name,
+      meta : req.body.meta,
+      grade : req.body.grade,
+      component : req.body.component,
+      level : req.body.level,
+      parent: req.body.parent
+    },{$push: {nodes: {
+          node: req.body.node
+        }}},
+    {upsert:true}
+  ).then(data=> {
+    res.send({code: 200,data:data,msg: "添加成功！"});
+  })
+});
+
+router.get("/getRoutes",function (req,res) {
+  routes.find({grade: { $lte : req.query.grade}})
+    .then( data=> {
+      let newData = [];
+      data.forEach((item) => {
+        let newD = {};
+        newD.path = item.path;
+        if(item.parentPath) newD.parentPath = item.parentPath;
+        newD.children = item.children;
+        newD.level = item.level;
+        newD.name = item.name;
+        newD.component = item.component;
+        newD.meta = item.meta;
+        newData.push(newD);
+      });
+      res.send({code: 200,data1: newData,data2: data});
+    }).catch(err => {
+    console.log(err);
+  })
+});
+
 
 module.exports = router;

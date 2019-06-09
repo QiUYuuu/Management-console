@@ -2,25 +2,14 @@ const express = require("express"),
   user = require("../models/User_Schema"),
   router = express.Router();
 
-
-// router.get("/",passport.authenticate("jwt",{session:false}),(req,res) => {
-//   Promise.all([
-//     user.find().sort({Student_ID: -1})
-//       .skip((req.body.page - 1) * req.body.limit).limit(Number(req.body.limit)),
-//     user.countDocuments()
-//   ]).then(function (data) {
-//     res.send({code: 0, data: data[0], count: data[1]},req.user)
-//   });
-// });
-
-// router.get("/",passport.authenticate("jwt",{session:false}),function (req,res) {
-//   Promise.all([
-//     user.find().sort({Student_ID: -1})
-//       .skip((req.query.page - 1) * req.query.limit).limit(Number(req.query.limit)),
-//     user.countDocuments()
-//   ]).then(function (data) {
-//     res.send({code: 200, data: data[0], count: data[1],user:req.user})
-//   });
+// router.use(function (req, res, next) {
+//   if (req.session.login) {
+//     if (req.session.user.grade >= 10) {
+//       return next()
+//     }
+//     return res.send('没有权限')
+//   }
+//   res.send('没有登陆')
 // });
 
 router.get("/",function (req,res) {
@@ -33,12 +22,21 @@ router.get("/",function (req,res) {
   });
 });
 
+// router.get("/details",function (req,res) {
+//   user.findById(req.query.id)
+//     .then( data => {
+//       res.send({code: 200,data:data});
+//     })
+// });
+
 router.get("/details",function (req,res) {
-  user.findById(req.query.id)
+  console.log(req);
+  user.findOne({Student_ID: req.query.Student_ID})
     .then( data => {
       res.send({code: 200,data:data});
     })
 });
+
 
 
 router.get("/edit",function (req,res) {
