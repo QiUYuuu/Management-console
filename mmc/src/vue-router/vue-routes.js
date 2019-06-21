@@ -4,7 +4,7 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter);
 
 export default new VueRouter({
-  mode: "history",
+  // mode: "history",
   base: __dirname,
   routes : [
     {path:"/",meta: {requireAuth: false},component:resolve => require(['../components/login'],resolve)},
