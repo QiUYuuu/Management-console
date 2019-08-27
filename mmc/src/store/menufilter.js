@@ -22,7 +22,10 @@ function generaMenu(routers,data){
       let r = data.find((value, index, arr) => {
         return value.name === item.parentPath;
       });
-      r.children.push(newMenu);
+      console.log(r);
+      if(r != undefined){
+        r.children.push(newMenu);
+      }
     }else{
       routers.push(newMenu);
     }

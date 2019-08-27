@@ -16,7 +16,7 @@ Vue.use(ElementUI,{ size: 'small', zIndex: 3000 });
 
 router.beforeEach((to, from, next) => {
   if (to.meta.requireAuth === undefined) {
-    if (store.state.getters.token) {
+    if (store.getters.token) {
       next()
     } else {
       next({
